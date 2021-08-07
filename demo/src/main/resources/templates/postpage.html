@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+
+text-align: center;
+background-color: aliceblue;
+
+}
+
+nav a {
+
+padding-right: 3vw;
+text-decoration: none;
+
+&:hover{
+background-color: white;
+}
+
+}
+
+nav {
+
+background-color: lightpink;
+
+}
+
+ul{
+
+list-style-type: none;
+}
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+<form method="POST" action="/posts" >
+
+  <p><label for="body">Create a post</label>
+    <textarea name="body" id="body" rows="10" cols="600"></textarea></p>
+
+  <input type="submit" />
+</form>
+</body>
+</html>
