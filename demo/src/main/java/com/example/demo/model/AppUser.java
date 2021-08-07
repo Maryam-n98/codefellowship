@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class AppUser implements UserDetails {
@@ -22,6 +23,15 @@ public class AppUser implements UserDetails {
 
     @OneToMany(mappedBy = "appUser")
     List<Post> posts;
+
+    @ManyToMany
+    public
+    Set<AppUser> followers;
+
+    @ManyToMany
+    public
+    Set<AppUser> following;
+
     public AppUser(){}
 
     public AppUser(String username,String password, Date dob, String firstname, String lastname, String bio){
@@ -38,13 +48,6 @@ public class AppUser implements UserDetails {
         this.username = username;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
 
     public String getUsername() {
         return this.username;
@@ -75,6 +78,10 @@ public class AppUser implements UserDetails {
         return null;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getPassword() {
         return this.password;
     }
@@ -93,6 +100,10 @@ public class AppUser implements UserDetails {
 
     public String getLastname() {
         return lastname;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
     }
 
     public void setBio(String bio) {
@@ -121,5 +132,25 @@ public class AppUser implements UserDetails {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public Set<AppUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<AppUser> followers) {
+        this.followers = followers;
+    }
+
+    public Set<AppUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<AppUser> following) {
+        this.following = following;
     }
 }

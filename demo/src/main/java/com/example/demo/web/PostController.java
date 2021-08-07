@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
-import java.security.Timestamp;
+
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PostController {
@@ -43,6 +45,18 @@ public class PostController {
     @GetMapping("/post")
     public String getPostPage() {
         return "postpage";
+    }
+
+    @GetMapping("/feed")
+    public String getFeedPage(Principal p, Model m) {
+        AppUser appUser = appUserRepository.findByUsername(p.getName());
+        Set<AppUser> following = appUser.following;
+        List<Post> posts = postRepository.findByAppUserIn(following);
+
+        m.addAttribute("posts",posts);
+        m.addAttribute("appUser",appUser);
+        m.addAttribute("principal", p.getName());
+        return "feed";
     }
 
 

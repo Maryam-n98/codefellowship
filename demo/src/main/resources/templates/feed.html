@@ -2,9 +2,9 @@
 <html lang="en" xmlns:th="http://www,thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Application User</title>
+  <title>Feed</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<style>
+  <style>
   body {
 
 text-align: center;
@@ -66,18 +66,19 @@ margin: 1vw;
 
 <div th:replace="fragments/header :: header">...</div>
 
-<h1>Application User - <span th:text="${appUser.username}"></span></h1>
+<h2>Feed</h2>
 
-<form class="follow-button-form" method="POST" th:action="'/follow/' + ${appUser.id}" >
-  <button type="submit">Follow</button>
-</form>
+<ul class="feed-list">
+  <li th:each="post : ${posts}">
+    <span th:text="${post.createdAt}"></span>
+    <span th:text="${post.body}"></span>
 
-<p>First Name: <span th:text="${appUser.firstname}"></span></p>
-<p>Last Name: <span th:text="${appUser.lastname}"></span></p>
-<p>Date of Birth: <span th:text="${appUser.dob}"></span></p>
-<p>Bio: <span th:text="${appUser.bio}"></span></p>
-
-
+    <a th:href="@{'/users/' + ${post.appUser.id}}">
+      <span th:text="${post.appUser.firstname}"></span>
+      <span th:text="${post.appUser.lastname}"></span>
+    </a>
+  </li>
+</ul>
 
 </body>
 </html>
